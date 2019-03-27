@@ -3,7 +3,13 @@
 {% block body %}
     <div class="card form-row" xmlns="http://www.w3.org/1999/html">
         <div class="card-body ">
-            <h3 class="card-subtitle mb-2 text-muted">Edition de contacts</h3>
+            <h3 class="card-subtitle mb-2 text-muted">
+                {% if data.id is not empty %}
+                    Edition du contact
+                {% else %}
+                    Création d'un contact
+                {% endif %}
+            </h3>
             <div style="display: none" class="alert alert-primary" id="alert" role="alert">
                 <span id="nameStatus"></span></br>
             </div>

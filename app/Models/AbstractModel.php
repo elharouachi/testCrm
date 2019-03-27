@@ -92,7 +92,19 @@ abstract class AbstractModel
      */
     public function update($id, $fields)
     {
-        //@todo
+        $fields = $this->cleanInputs($fields);
+        $sqlParts = [];
+        $attributes = [];
+        foreach ($fields as $k => $v) {
+            $sqlParts[] = "$k = ?";
+            $attributes[] = $v;
+        }
+        $sqlPart = implode(', ', $sqlParts);
+        $sqlPart = $sqlPart ." WHERE id = ?";
+        $attributes[] = $id;
+
+        return $this->query("UPDATE {$this->table} SET $sqlPart",
+            $attributes, true);
     }
 
     /**

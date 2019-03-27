@@ -39,7 +39,7 @@ class MainController
      */
     public function apiClient($methode, $datas = [])
     {
-        $api = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . $methode;
+        $api = $_SERVER['HTTP_HOST'] . "/api.php?request=" . $methode;
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $api);
         curl_setopt($curl, CURLOPT_POST, true);

@@ -58,7 +58,7 @@
         if(nom){
             $.ajax({
                 type: 'POST',
-                url: 'http://leboncoin.local/palindrome',
+                url: 'http://leboncoin.local/api.php?request=palindrome',
                 data: {
                     'name': nom
                 },
@@ -84,7 +84,7 @@
             $('#progress').show();
             $.ajax({
                 type: 'POST',
-                url: 'http://leboncoin.local/email',
+                url: 'http://leboncoin.local/api.php?request=email',
                 data: {
                     'email': $('#email').val()
                 },

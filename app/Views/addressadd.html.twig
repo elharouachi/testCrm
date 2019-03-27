@@ -4,7 +4,13 @@
 
     <div class="card form-row">
         <div class="card-body ">
-            <h3 class="card-subtitle mb-2 text-muted">Edition d' adresses </h3>
+            <h3 class="card-subtitle mb-2 text-muted">
+                {% if data.id is not empty %}
+                    Edition d'adresse
+                {% else %}
+                    Création d'une adresse
+                {% endif %}
+            </h3>
             {% if error %}
                 <div  class="alert alert-danger" >
                     Problème lors de la modification de l'adresse

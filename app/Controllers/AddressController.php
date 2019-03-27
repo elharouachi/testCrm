@@ -57,7 +57,7 @@ class AddressController extends MainController implements ControllerInterface
                 ]);
 
                 if ($result) {
-                    header("Location: /index.php?p=address.index&id=$idContact");
+                    header("Location: index.php?p=address.index&id=$idContact");
                 } else {
                     $error = true;
                     $this->twig->render('addressadd.html.twig',
@@ -84,7 +84,6 @@ class AddressController extends MainController implements ControllerInterface
         if (!empty($_POST)) {
             $response = $this->sanitize($_POST);
 
-
             if ($response["response"]) {
                 $addresse = $this->Addresse->findById($id);
                 $result = $this->Addresse->update($id,
@@ -94,9 +93,10 @@ class AddressController extends MainController implements ControllerInterface
                         'country'    => $response['country'],
                         'postalCode' => $response['postalCode'],
                         'street'     => $response['street'],
+                        'idContact'  => $response['idContact']
                     ]);
                 if ($result) {
-                    header("Location: /index.php?p=address.index&id=$addresse->idContact");
+                    header("Location: index.php?p=address.index&id=$addresse->idContact");
                 } else {
                     $error = true;
                     $this->twig->render('addressadd.html.twig',
@@ -136,12 +136,13 @@ class AddressController extends MainController implements ControllerInterface
      *
      * @return array
      */
-    public function sanitize($data = [])
+    public function sanitize(array $data = []): array
     {
         $number     = $_POST['number'];
         $city       = strtoupper($_POST['city']);
         $country    = strtoupper($_POST['country']);
         $street     = strtoupper($_POST['street']);
+        $postalCode  = intval($_POST['postalCode']);
         $idContact  = intval($_POST['idContact']);
 
         if ($number && $city && $country && $postalCode && $street
@@ -149,15 +150,23 @@ class AddressController extends MainController implements ControllerInterface
         ) {
             return [
                 'response'   => true,
-                'number'     => $_POST['number'],
-                'city'       => strtoupper($_POST['city']),
-                'country'    => strtoupper($_POST['country']),
+                'number'     => $number,
+                'city'       => $city,
+                'country'    => $country,
                 'postalCode' => $postalCode,
-                'street'     => strtoupper($_POST['street']),
-                'idContact'  => $_POST['idContact']
+                'street'     => $street,
+                'idContact'  => $idContact
             ];
         } else {
             return ['response' => false];
         }
+    }
+
+    /**
+     * Création d'adresse pour un contact
+     */
+    public function create()
+    {
+        //@todo
     }
 }

@@ -26,7 +26,8 @@ class ApiService
      */
     public function processApi()
     {
-        $func = strtolower(trim(str_replace("/", "", $this->request['request'])));
+        $func = strtolower(trim(str_replace("/", "", $_REQUEST['request'])));
+
         if ((int)method_exists($this, $func) > 0) {
             $this->$func();
         } else {
@@ -104,7 +105,7 @@ class ApiService
     private function setHeader()
     {
         header("HTTP/1.1 " . $this->code . " " . $this->getStatusMessage());
-        header("Content-Type:" . $this->_content_type);
+        header("Content-Type:" . $this->content_type);
     }
 
     /**
