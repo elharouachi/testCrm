@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `addresses` (
   PRIMARY KEY (`id`),
   KEY `idContact` (`idContact`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-
+ALTER TABLE `addresses` ADD INDEX( `street`, `city`);
 --
 -- Déchargement des données de la table `addresses`
 --
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `contacts` (
   PRIMARY KEY (`id`),
   KEY `userId` (`userId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-
+CREATE UNIQUE INDEX fullname ON `contacts` ( `nom`, `prenom`);
 --
 -- Déchargement des données de la table `contacts`
 --
